@@ -3933,35 +3933,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DELL\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "/Users/jamesvanstrahlen/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\OMC\\PGN\\AdministraPago\\BackEnd\\WebApiAutores\\AdminPagosApi.csproj",
+      "projectUniqueName": "/Users/jamesvanstrahlen/Documents/AdminPagos/AdmonPagosBack/WebApiAutores/AdminPagosApi.csproj",
       "projectName": "AdminPagosApi",
-      "projectPath": "C:\\OMC\\PGN\\AdministraPago\\BackEnd\\WebApiAutores\\AdminPagosApi.csproj",
-      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "C:\\OMC\\PGN\\AdministraPago\\BackEnd\\WebApiAutores\\obj\\",
+      "projectPath": "/Users/jamesvanstrahlen/Documents/AdminPagos/AdmonPagosBack/WebApiAutores/AdminPagosApi.csproj",
+      "packagesPath": "/Users/jamesvanstrahlen/.nuget/packages/",
+      "outputPath": "/Users/jamesvanstrahlen/Documents/AdminPagos/AdmonPagosBack/WebApiAutores/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "/Users/jamesvanstrahlen/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
+        "/usr/local/share/dotnet/sdk/7.0.311/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4026,7 +4016,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.311/RuntimeIdentifierGraph.json"
       }
     }
   }
