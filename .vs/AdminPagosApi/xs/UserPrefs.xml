@@ -1,0 +1,45 @@
+﻿<Properties StartupConfiguration="{8E872104-2625-4701-878A-63629C2CCC89}|WebApiAutores">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebApiAutores/DTO/FacturaRegistroDTOCR.cs">
+    <Files>
+      <File FileName="WebApiAutores/DTO/EntidadTipoObligacionDTOCR.cs" Line="1" Column="1" />
+      <File FileName="WebApiAutores/Entidades/FacturaEstado.cs" Line="8" Column="1" />
+      <File FileName="WebApiAutores/Helpers/AutoMapperProfiles.cs" Line="65" Column="59" />
+      <File FileName="WebApiAutores/Program.cs" Line="1" Column="1" />
+      <File FileName="WebApiAutores/Startup.cs" Line="1" Column="1" />
+      <File FileName="WebApiAutores/Properties/launchSettings.json" Line="1" Column="1" />
+      <File FileName="WebApiAutores/Controllers/FacturasController.cs" Line="88" Column="98" />
+      <File FileName="WebApiAutores/Controllers/DepartamentoController.cs" Line="1" Column="1" />
+      <File FileName="WebApiAutores/Entidades/Departamento.cs" Line="1" Column="1" />
+      <File FileName="WebApiAutores/ApplicationDbContext.cs" Line="1" Column="1" />
+      <File FileName="WebApiAutores/DTO/FacturaRegistroDTOCR.cs" Line="31" Column="56" />
+      <File FileName="WebApiAutores/DTO/FacturaRegistroDTO.cs" Line="1" Column="1" />
+      <File FileName="WebApiAutores/DTO/EntidadTipoObligacionDTO.cs" Line="1" Column="1" />
+      <File FileName="WebApiAutores/DTO/SedeContratoDTO.cs" Line="10" Column="61" />
+      <File FileName="WebApiAutores/Controllers/ArchivoController.cs" Line="51" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="AdminPagosApi">
+            <Node name="AdminPagosApi" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="DTO" expanded="True" />
+              <Node name="Entidades" expanded="True" />
+              <Node name="uploads" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.AdminPagosApi PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+</Properties>
