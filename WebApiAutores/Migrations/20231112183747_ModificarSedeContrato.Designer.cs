@@ -4,6 +4,7 @@ using AdminPagosApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdminPagosApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231112183747_ModificarSedeContrato")]
+    partial class ModificarSedeContrato
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -802,9 +805,6 @@ namespace AdminPagosApi.Migrations
 
                     b.Property<string>("Direccion")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Estado")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");

@@ -3,6 +3,7 @@ using AdminPagosApi.Entidades;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -106,6 +107,38 @@ namespace AdminPagosApi.Controllers
             context.Entry(entidad).State = EntityState.Modified;
             await context.SaveChangesAsync();
             return NoContent();
+        }
+
+
+        [HttpPatch("{id:int}")]
+        public async Task<ActionResult> Patch(int id, JsonPatchDocument<TipoTarifaDTO> patchDocument)
+        {
+            if (patchDocument == null)
+            {
+                return BadRequest();
+            }
+            var tipoEmpresaDB = await context.TipoTarifa.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (tipoEmpresaDB == null)
+            {
+                return NotFound();
+            }
+
+            var tipoEmpresaDTO = mapper.Map<TipoTarifaDTO>(tipoEmpresaDB);
+            patchDocument.ApplyTo(tipoEmpresaDTO, ModelState);
+
+            var esValido = TryValidateModel(tipoEmpresaDTO);
+            if (!esValido)
+            {
+                return BadRequest(ModelState);
+            }
+
+            mapper.Map(tipoEmpresaDTO, tipoEmpresaDB);
+            tipoEmpresaDB.FechaModificacion = DateTime.Now;
+
+            await context.SaveChangesAsync();
+            return NoContent();
+
         }
 
         [HttpDelete("{id:int}")]

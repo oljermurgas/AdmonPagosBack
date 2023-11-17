@@ -13,65 +13,85 @@ using WebApiAutores.Entidades;
 namespace AdminPagosApi.Controllers
 {
     [ApiController]
-    [Route("AdmonPago/Api/TipoVinculacionContractual")]
+    [Route("AdmonPago/Api/Coordinadors")]
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class TipoVinculacionContractualController : ControllerBase
+    public class CoordinadoresController : ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public TipoVinculacionContractualController(ApplicationDbContext context, IMapper mapper)
+        public CoordinadoresController(ApplicationDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<TipoVinculacionContractualDTO>>> Get()
+        public async Task<ActionResult<List<CoordinadorPgnDTO>>> Get()
         {
-            var entidades = await context.TipoVinculacionContractual.OrderBy(e => e.Codigo)
+            var entidades = await context.CoordinacionPGNs
+                                 .OrderBy(e => e.Coodinacion)
                                  .ToListAsync();
-            var dtos = mapper.Map<List<TipoVinculacionContractualDTO>>(entidades);
+            var dtos = mapper.Map<List<CoordinadorPgnDTO>>(entidades);
             return dtos;
         }
 
         [HttpGet("{codigo}")]
-        public async Task<ActionResult<TipoVinculacionContractualDTO>> Get(string codigo)
+        public async Task<ActionResult<CoordinadorPgnDTO>> Get(string nombre)
         {
-            var entidades = await context.TipoVinculacionContractual.FirstOrDefaultAsync(x => x.Codigo.Contains(codigo));
+            var entidades = await context.CoordinacionPGNs.FirstOrDefaultAsync(x => x.Coodinacion.Contains(nombre));
             if (entidades == null)
             {
                 return NotFound();
             }
-            var dtos = mapper.Map<TipoVinculacionContractualDTO>(entidades);
+            var dtos = mapper.Map<CoordinadorPgnDTO>(entidades);
             return dtos;
         }
 
-        [HttpGet("{id:int}", Name = "obtenertipovinculacioncontractual")]
-        public async Task<ActionResult<TipoVinculacionContractualDTO>> Get(int id)
+        [HttpGet("list/{id:int}")]
+        public async Task<ActionResult<List<SedeDTO>>> GetList(int id)
         {
-            var entidad = await context.TipoVinculacionContractual.FirstOrDefaultAsync(x => x.Id == id);
+            var entidades = await context.CoordinacionPGNSedes
+              .Include(x => x.CoordinacionPGNs)
+              .Where(x => x.CoordinacionPGNId == id)
+              .ToListAsync();
+
+
+            if (!entidades.Any())
+            {
+                return NotFound();
+            }
+
+            var dtos = mapper.Map<List<SedeDTO>>(entidades);
+            return Ok(dtos);
+        }
+
+        [HttpGet("{id:int}", Name = "obtenercoordinacion")]
+        public async Task<ActionResult<CoordinadorPgnDTO>> Get(int id)
+        {
+            var entidad = await context.CoordinacionPGNs.FirstOrDefaultAsync(x => x.Id == id);
             if (entidad == null)
             {
                 return NotFound();
             }
-            var dtos = mapper.Map<TipoVinculacionContractualDTO>(entidad);
+            var dtos = mapper.Map<CoordinadorPgnDTO>(entidad);
             return dtos;
         }
 
+
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] TipoVinculacionContractualDTOCR tipoVinculacionContractualDTOCR)
+        public async Task<ActionResult> Post([FromBody] CoordinadorPgnDTOCR coordinadorDTOCR)
         {
             try
             {
-                var ValideExistencia = await ValidarExistencia(tipoVinculacionContractualDTOCR);
+                var ValideExistencia = await ValidarExistencia(coordinadorDTOCR);
                 if (ValideExistencia)
                 {
-                    return BadRequest(new { message = "El tipo vinculacion contractual: >> " + tipoVinculacionContractualDTOCR.Codigo + " << ya existe" });
+                    return BadRequest(new { message = "La sede : >> " + coordinadorDTOCR.Coodinacion + " << ya existe" });
                 }
 
                 //var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
-                var entidad = mapper.Map<TipoVinculacionContractual>(tipoVinculacionContractualDTOCR);
+                var entidad = mapper.Map<CoordinacionPGN>(coordinadorDTOCR);
                 //-----------------------------------------------------------------------------------------
                 //entidad.UserName = userName;
                 entidad.FechaCreacion = DateTime.Now;
@@ -79,8 +99,8 @@ namespace AdminPagosApi.Controllers
                 //-----------------------------------------------------------------------------------------
                 context.Add(entidad);
                 await context.SaveChangesAsync();
-                var entidadDTO = mapper.Map<TipoVinculacionContractualDTO>(entidad);
-                return new CreatedAtRouteResult("obtenertipovinculacioncontractual", new { id = entidadDTO.Id }, entidadDTO);
+                var entidadDTO = mapper.Map<CoordinadorPgnDTO>(entidad);
+                return new CreatedAtRouteResult("obtenercoordinacion", new { id = entidadDTO.Id }, entidadDTO);
             }
             catch (Exception Ex)
             {
@@ -89,16 +109,16 @@ namespace AdminPagosApi.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] TipoVinculacionContractualDTO tipoVinculacionContractualDTO)
+        public async Task<ActionResult> Put(int id, [FromBody] CoordinadorPgnDTO coordinadorDTO)
         {
-            var existe = await context.TipoVinculacionContractual.AnyAsync(x => x.Id == id);
+            var existe = await context.CoordinacionPGNs.AnyAsync(x => x.Id == id);
             if (!existe)
             {
                 return NotFound();
             }
 
             //var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
-            var entidad = mapper.Map<TipoVinculacionContractual>(tipoVinculacionContractualDTO);
+            var entidad = mapper.Map<CoordinadorPgnDTO>(coordinadorDTO);
             //-----------------------------------------------------------------------------------------
             //entidad.UserName = userName;
             entidad.FechaModificacion = DateTime.Now;
@@ -110,46 +130,45 @@ namespace AdminPagosApi.Controllers
         }
 
         [HttpPatch("{id:int}")]
-        public async Task<ActionResult> Patch(int id, JsonPatchDocument<TipoVinculacionContractualDTO> patchDocument)
+        public async Task<ActionResult> Patch(int id, JsonPatchDocument<CoordinadorPgnDTO> patchDocument)
         {
             if (patchDocument == null)
             {
                 return BadRequest();
             }
-            var tipoEmpresaDB = await context.TipoVinculacionContractual.FirstOrDefaultAsync(x => x.Id == id);
+            var sedeDB = await context.CoordinacionPGNs.FirstOrDefaultAsync(x => x.Id == id);
 
-            if (tipoEmpresaDB == null)
+            if (sedeDB == null)
             {
                 return NotFound();
             }
 
-            var tipoEmpresaDTO = mapper.Map<TipoVinculacionContractualDTO>(tipoEmpresaDB);
-            patchDocument.ApplyTo(tipoEmpresaDTO, ModelState);
+            var sedeDTO = mapper.Map<CoordinadorPgnDTO>(sedeDB);
+            patchDocument.ApplyTo(sedeDTO, ModelState);
 
-            var esValido = TryValidateModel(tipoEmpresaDTO);
+            var esValido = TryValidateModel(sedeDTO);
             if (!esValido)
             {
                 return BadRequest(ModelState);
             }
 
-            mapper.Map(tipoEmpresaDTO, tipoEmpresaDB);
-            tipoEmpresaDB.FechaModificacion = DateTime.Now;
+            mapper.Map(sedeDTO, sedeDB);
+            sedeDB.FechaModificacion = DateTime.Now;
 
             await context.SaveChangesAsync();
             return NoContent();
-
         }
 
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var existe = await context.TipoVinculacionContractual.AnyAsync(x => x.Id == id);
+            var existe = await context.CoordinacionPGNs.AnyAsync(x => x.Id == id);
             if (!existe)
             {
                 return NotFound();
             }
 
-            var entidad = await context.TipoVinculacionContractual.FirstOrDefaultAsync(x => x.Id == id);
+            var entidad = await context.CoordinacionPGNs.FirstOrDefaultAsync(x => x.Id == id);
             entidad.Id = id;
             entidad.Estado = false;
             context.Entry(entidad).State = EntityState.Modified;
@@ -157,9 +176,9 @@ namespace AdminPagosApi.Controllers
             return NoContent();
         }
 
-        private async Task<bool> ValidarExistencia(TipoVinculacionContractualDTOCR tipoVinculacionContractualDTOCR)
+        private async Task<bool> ValidarExistencia(CoordinadorPgnDTOCR coordinadorDTOCR)
         {
-            var ValidarExistencia = await context.TipoVinculacionContractual.AnyAsync(x => (x.Codigo == tipoVinculacionContractualDTOCR.Codigo));
+            var ValidarExistencia = await context.CoordinacionPGNs.AnyAsync(x => (x.Coodinacion == coordinadorDTOCR.Coodinacion));
             return ValidarExistencia;
         }
 

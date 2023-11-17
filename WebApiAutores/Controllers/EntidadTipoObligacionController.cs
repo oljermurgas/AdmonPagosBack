@@ -138,8 +138,9 @@ namespace AdminPagosApi.Controllers
 
             mapper.Map(entidadDTO, entidadDB);
             entidadDB.FechaModificacion = DateTime.Now;
+            entidadDB.Estado = true;
 
-            await context.SaveChangesAsync();
+           await context.SaveChangesAsync();
             return NoContent();
         }
 
@@ -152,7 +153,7 @@ namespace AdminPagosApi.Controllers
                 return NotFound();
             }
 
-            var entidad = await context.Sedes.FirstOrDefaultAsync(x => x.Id == id);
+            var entidad = await context.EntidadTipoObligaciones.FirstOrDefaultAsync(x => x.Id == id);
             entidad.Id = id;
             entidad.Estado = false;
             context.Entry(entidad).State = EntityState.Modified;

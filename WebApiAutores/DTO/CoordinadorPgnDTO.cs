@@ -1,6 +1,10 @@
-﻿namespace WebApiAutores.Entidades
+﻿using AdminPagosApi.Entidades;
+using System.ComponentModel.DataAnnotations;
+using WebApiAutores.Entidades;
+
+namespace AdminPagosApi.DTO
 {
-    public class CoordinacionPGN
+    public class CoordinadorPgnDTO
     {
         public int Id { get; set; }
         public string Coodinacion { get; set; }

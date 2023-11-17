@@ -14,6 +14,8 @@ namespace WebApiAutores.Entidades
         public DateTime? FechaFinal { get; set; }
         public string Identificacion { get; set; }
         public string RazonSocial { get; set; }
+        public string telefono { get; set; }        
+        public string email { get; set; } = string.Empty;
         public decimal Valor { get; set; }
 
         public string Notas { get; set; }

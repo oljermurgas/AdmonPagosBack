@@ -144,13 +144,13 @@ namespace AdminPagosApi.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var existe = await context.Sedes.AnyAsync(x => x.Id == id);
+            var existe = await context.Entidades.AnyAsync(x => x.Id == id);
             if (!existe)
             {
                 return NotFound();
             }
 
-            var entidad = await context.Sedes.FirstOrDefaultAsync(x => x.Id == id);
+            var entidad = await context.Entidades.FirstOrDefaultAsync(x => x.Id == id);
             entidad.Id = id;
             entidad.Estado = false;
             context.Entry(entidad).State = EntityState.Modified;

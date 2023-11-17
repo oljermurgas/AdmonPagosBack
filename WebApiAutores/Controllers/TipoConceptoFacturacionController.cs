@@ -29,7 +29,7 @@ namespace AdminPagosApi.Controllers
         public async Task<ActionResult<List<TipoConceptoFacturacionDTO>>> Get()
         {
             var entidades = await context.TipoConceptoFacturacion
-                                 .Include(x => x.TipoPagoAdmon)
+                                // .Include(x => x.TipoPagoAdmon)
                                  .OrderBy(e => e.Codigo)
                                  .ToListAsync();
             var dtos = mapper.Map<List<TipoConceptoFacturacionDTO>>(entidades);

@@ -65,6 +65,15 @@ namespace AdminPagosApi.Helpers
             CreateMap<FacturaRegistro, FacturaRegistroDTO>().ReverseMap();
             CreateMap<FacturaRegistroDTOCR, FacturaRegistro>();
 
+            CreateMap<SedeEntidad, SedeEntidadDTO>().ReverseMap();
+            CreateMap<SedeEntidadDTOCR, SedeEntidad>();
+
+            CreateMap<CoordinacionPGN, CoordinadorPgnDTO>().ReverseMap();
+            CreateMap<CoordinadorPgnDTOCR, CoordinacionPGN>();
+
+            CreateMap<CoordinacionPGNSede, CoordnadorPgnSedeDTO>().ReverseMap();
+            CreateMap<CoordnadorPgnSedeDTOCR, CoordinacionPGNSede>();
+
 
             // CreateMap<Municipio, MunicipioDTO>()
             // .ForMember(dest => dest.CodDep, opt => opt.MapFrom(src => src.DepartamentoId));

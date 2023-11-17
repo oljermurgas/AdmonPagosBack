@@ -38,6 +38,7 @@ namespace AdminPagosApi.Entidades
         public DateTime FechaModificacion { get; set; } = DateTime.Now;
 
         public List<SedeContrato> SedeContratos { get; set; }
+        public List<CoordinacionPGNSede> CoordinacionPGNSedes { get; set; }
 
     }
 }
