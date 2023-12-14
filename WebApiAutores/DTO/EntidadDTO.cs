@@ -35,6 +35,8 @@ namespace AdminPagosApi.DTO
         public int MunicipioId { get; set; }
         public Municipio Municipios { get; set; }
 
+        public int PeriodicidadFactura { get; set; }
+
         public bool Estado { get; set; }
         public int UsuarioId { get; set; }
         public DateTime FechaCreacion { get; set; } = DateTime.Now;

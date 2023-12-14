@@ -39,18 +39,6 @@ namespace AdminPagosApi.Controllers
         }
 
 
-        //[HttpGet("{codigo}")]
-        //public async Task<ActionResult<EntidadTipoObligacionDTO>> Get(int entidadid)
-        //{
-        //    var entidades = await context.EntidadTipoObligaciones.FirstOrDefaultAsync(x => x.EntidadId == entidadid);
-        //    if (entidades == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var dtos = mapper.Map<EntidadTipoObligacionDTO>(entidades);
-        //    return dtos;
-        //}
-
         [HttpGet("{id:int}", Name = "obtenerentidadtipoobligacion")]
         public async Task<ActionResult<EntidadTipoObligacionDTO>> Get(int id)
         {
@@ -71,7 +59,7 @@ namespace AdminPagosApi.Controllers
                 var ValideExistencia = await ValidarExistencia(entidadTipoObligacionDTOCR);
                 if (ValideExistencia)
                 {
-                    return BadRequest(new { message = "La entidad con la obligacion: >> " + entidadTipoObligacionDTOCR.NumeroContrato + " << ya existe" });
+                    return BadRequest(new { message = "La entidad con la obligacion: >> " + entidadTipoObligacionDTOCR.EntidadId + " << ya existe" });
                 }
 
                 //var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;

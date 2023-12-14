@@ -15,7 +15,11 @@ namespace WebApiAutores.Entidades
         public int EntidadId { get; set; }
         public Entidad Entidades { get; set; }
 
-        public int UsuarioId { get; set; }
+        public string NumeroContrato { get; set; }
+        public string NumeroContador { get; set; }
+
+
+    public int UsuarioId { get; set; }
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
         public DateTime FechaModificacion { get; set; } = DateTime.Now;
 

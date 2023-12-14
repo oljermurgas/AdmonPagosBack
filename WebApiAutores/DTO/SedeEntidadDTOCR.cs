@@ -12,5 +12,8 @@ namespace AdminPagosApi.DTO
 
         public int EntidadId { get; set; }
 
+        public string NumeroContrato { get; set; }
+        public string NumeroContador { get; set; }
+
     }
 }

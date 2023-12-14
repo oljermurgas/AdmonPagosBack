@@ -36,8 +36,8 @@ namespace AdminPagosApi.Controllers
             return dtos;
         }
 
-
-        [HttpGet("{obtenercoordinacionsede}")]
+                   
+        [HttpGet("{id:int}", Name = "obtenercoordinacionsede")]
         public async Task<ActionResult<CoordnadorPgnSedeDTO>> Get(int  id)
         {
             var entidades = await context.CoordinacionPGNSedes.FirstOrDefaultAsync(x => x.Id == id);
@@ -50,20 +50,23 @@ namespace AdminPagosApi.Controllers
         }
 
         [HttpGet("list/{id:int}")]
-        public async Task<ActionResult<List<CoordinadorPgnDTO>>> GetList(int id)
+        public async Task<ActionResult<List<CoordnadorPgnSedeDTO>>> GetList(int id)
         {
-            var entidades = await context.CoordinacionPGNs
-          //      .Include(x => x.coo)
-                .Where(x => x.Id == id).ToListAsync();
+            var entidades = await context.CoordinacionPGNSedes
+                .Include(x => x.CoordinacionPGNs)
+                .Include(x => x.Sedes)
+                .Where(x => x.CoordinacionPGNId == id)
+                .ToListAsync();
 
             if (!entidades.Any())
             {
                 return NotFound();
             }
 
-            var dtos = mapper.Map<List<CoordinadorPgnDTO>>(entidades);
+            var dtos = mapper.Map<List<CoordnadorPgnSedeDTO>>(entidades);
             return Ok(dtos);
         }
+
 
 
         [HttpPost]
@@ -123,7 +126,7 @@ namespace AdminPagosApi.Controllers
             {
                 return BadRequest();
             }
-            var sedeDB = await context.CoordinacionPGNs.FirstOrDefaultAsync(x => x.Id == id);
+            var sedeDB = await context.CoordinacionPGNSedes.FirstOrDefaultAsync(x => x.Id == id);
 
             if (sedeDB == null)
             {
@@ -146,22 +149,21 @@ namespace AdminPagosApi.Controllers
             return NoContent();
         }
 
+
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var existe = await context.CoordinacionPGNs.AnyAsync(x => x.Id == id);
-            if (!existe)
+            var entidad = await context.CoordinacionPGNSedes.FirstOrDefaultAsync(x => x.Id == id);
+            if (entidad == null)
             {
                 return NotFound();
             }
 
-            var entidad = await context.CoordinacionPGNs.FirstOrDefaultAsync(x => x.Id == id);
-            entidad.Id = id;
-            entidad.Estado = false;
-            context.Entry(entidad).State = EntityState.Modified;
+            context.CoordinacionPGNSedes.Remove(entidad);
             await context.SaveChangesAsync();
             return NoContent();
         }
+
 
         private async Task<bool> ValidarExistencia(CoordnadorPgnSedeDTOCR coordnadorPgnSedeDTOCR)
         {

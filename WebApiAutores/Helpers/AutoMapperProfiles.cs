@@ -71,24 +71,14 @@ namespace AdminPagosApi.Helpers
             CreateMap<CoordinacionPGN, CoordinadorPgnDTO>().ReverseMap();
             CreateMap<CoordinadorPgnDTOCR, CoordinacionPGN>();
 
-            CreateMap<CoordinacionPGNSede, CoordnadorPgnSedeDTO>().ReverseMap();
+            CreateMap<CoordinacionPGNSede, CoordnadorPgnSedeDTO>()
+                .ForMember(dest => dest.NombreSede, opt => opt.MapFrom(src => src.Sedes.Nombre))
+                .ReverseMap();
             CreateMap<CoordnadorPgnSedeDTOCR, CoordinacionPGNSede>();
 
+            CreateMap<FacturaTipoObligacionConceptos, FacturaTipoObligacionConceptosDTO>().ReverseMap();
+            CreateMap<FacturaTipoObligacionConceptosDTOCR, FacturaTipoObligacionConceptos>();
 
-            // CreateMap<Municipio, MunicipioDTO>()
-            // .ForMember(dest => dest.CodDep, opt => opt.MapFrom(src => src.DepartamentoId));
-
-            // Configurar el mapeo inverso de MunicipioDTO a Municipio
-            //  CreateMap<MunicipioDTO, Municipio>()
-            //      .ForMember(dest => dest.DepartamentoId, opt => opt.MapFrom(src => src.CodDep));
-
-            //CreateMap<PProductoPropiedad, PProductoPropiedadDTOCR>().ReverseMap();
-            //CreateMap<PProductoPropiedadDTOCR, PProductoPropiedad>();
-            //// CreateMap<PProductoPropiedadDTOUP, PProductoPropiedad>(); Falta por definir
-
-            //CreateMap<PProductoTipoConfiguracion, PProductoTipoConfiguracionDTO>().ReverseMap();
-            //CreateMap<PProductoTipoConfiguracionDTOCR, PProductoTipoConfiguracion>();
-            //CreateMap<PProductoTipoConfiguracionDTOUP, PProductoTipoConfiguracion>();
 
         }
     }

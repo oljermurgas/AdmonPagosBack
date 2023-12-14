@@ -33,6 +33,7 @@ namespace AdminPagosApi.Entidades
 
         public int MunicipioId { get; set; }
         public Municipio Municipios { get; set; }
+        public int PeriodicidadFactura { get; set; }
 
         public bool Estado { get; set; }
         public int UsuarioId { get; set; }

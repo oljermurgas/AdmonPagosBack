@@ -4,6 +4,7 @@ using AdminPagosApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdminPagosApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231129214054_ActualizarSedeEntidad")]
+    partial class ActualizarSedeEntidad
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,13 +162,13 @@ namespace AdminPagosApi.Migrations
                     b.Property<DateTime>("FechaModificacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("FechaOportunoPago")
+                    b.Property<DateTime?>("FechaPago")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("FechaPeriodoFacturaFin")
+                    b.Property<DateTime?>("FechaProximaFecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("FechaPeriodoFacturaInicio")
+                    b.Property<DateTime?>("FechaUltimoPago")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nota")
@@ -173,9 +176,6 @@ namespace AdminPagosApi.Migrations
 
                     b.Property<string>("NumeroContrato")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PagoInmediato")
-                        .HasColumnType("bit");
 
                     b.Property<string>("ReferenciaPago")
                         .HasColumnType("nvarchar(max)");
@@ -817,12 +817,6 @@ namespace AdminPagosApi.Migrations
 
                     b.Property<DateTime>("FechaModificacion")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("JefeCoordinadorEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("JefeCoordinadorNombre")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Responsable")
                         .HasColumnType("nvarchar(max)");

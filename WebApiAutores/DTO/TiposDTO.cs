@@ -54,6 +54,7 @@ namespace AdminPagosApi.DTO
         public DateTime FechaModificacion { get; set; } = DateTime.Now;
 
         public int TipoPagoAdmonId { get; set; }
+        public TipoPagoAdmonDTO TipoPagoAdmon { get; set; }
     }
 
     public class TipoInmuebleDTO
@@ -139,5 +140,18 @@ namespace AdminPagosApi.DTO
         public string Nombre { get; set; }
         public decimal CodMun { get; set; }
         public Departamento Departamento { get; set; }
+    }
+
+
+    public class EntidadResultadoDTO
+    {
+        public string NumeroDelContador { get; set; }
+        public UltimaFacturaDTO UltimaFactura { get; set; }
+    }
+
+    public class UltimaFacturaDTO
+    {
+        public DateTime Fecha { get; set; }
+        public decimal Valor { get; set; }
     }
 }

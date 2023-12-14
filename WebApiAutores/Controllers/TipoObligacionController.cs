@@ -43,6 +43,7 @@ namespace AdminPagosApi.Controllers
         {
             var entidades = await context.EntidadTipoObligaciones
                 .Include(e => e.TipoObligaciones) // Incluye las TipoObligaciones
+                .Include(x => x.TipoObligaciones.TipoPagoAdmon)
                 .Where(e => e.Entidades.Id == id) // Filtra por el ID de la entidad
                 .ToListAsync();
 
@@ -55,6 +56,30 @@ namespace AdminPagosApi.Controllers
             var dtos = mapper.Map<List<EntidadTipoObligacionDTO>>(entidades);
 
             return Ok(dtos);
+        }
+
+        [HttpGet("entidad/activas/{id:int}")]
+        public async Task<ActionResult<List<EntidadTipoObligacionDTO>>> ObtnerPorEntidadActivasId(int id)
+        {
+            var tipoObligaciones = await context.EntidadTipoObligaciones
+                 .Where(eto => eto.EntidadId == id && eto.Estado == true)
+                 .Include(eto => eto.TipoObligaciones.TipoPagoAdmon)
+                 .Select(eto => new TipoObligacionDTO
+                 {
+                     Id = eto.TipoObligaciones.Id,
+                     Codigo = eto.TipoObligaciones.Codigo,
+                     Descripcion = eto.TipoObligaciones.Descripcion,
+                     TipoPagoAdmonId = eto.TipoObligaciones.TipoPagoAdmonId,
+                     Estado = eto.Estado
+                 })
+                 .ToListAsync();
+
+            if (tipoObligaciones == null || tipoObligaciones.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(tipoObligaciones);
         }
 
 

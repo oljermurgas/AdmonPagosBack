@@ -18,17 +18,18 @@ namespace AdminPagosApi.Entidades
         public string FacturaNumero { get; set; }
         public string ReferenciaPago { get; set; }
         public DateTime? FechaEmision  {get; set;}
-        public DateTime? FechaPago { get; set; }
+        public DateTime? FechaOportunoPago { get; set; }
         public decimal ValorFactura { get; set; }
         public int FacturaEstadoId { get; set; }
         public FacturaEstado FacturaEstado { get; set; }  
         public string Nota { get; set; }    
-        public DateTime? FechaUltimoPago { get; set; }
-        public DateTime? FechaProximaFecha { get; set; }    
+        public DateTime? FechaPeriodoFacturaInicio { get; set; }
+        public DateTime? FechaPeriodoFacturaFin { get; set; }    
 
         public decimal ValorFacturaUltimoPago { get; set; }
         public string UrlFactura { get; set; }
         public bool Estado { get; set; }
+        public bool PagoInmediato { get; set; }
 
         public int UsuarioId { get; set; }
         public DateTime FechaCreacion { get; set; }

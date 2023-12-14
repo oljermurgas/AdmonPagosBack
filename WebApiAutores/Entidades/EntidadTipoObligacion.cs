@@ -7,9 +7,6 @@ namespace WebApiAutores.Entidades
     {
         public int Id { get; set; }
 
-        public string NumeroContrato { get; set; }
-        public string NumeroPagoElectronico { get; set; }
-
         public bool Estado { get; set; }
 
         public int EntidadId { get; set;}
@@ -19,11 +16,10 @@ namespace WebApiAutores.Entidades
         public TipoObligacion TipoObligaciones { get; set; }
         public int TipoTarifaId { get; set; }
         public TipoTarifa TipoTarifas { get; set; }
-        public int PeriodicidadFactura { get; set; }
-
 
         public int UsuarioId { get; set; }
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
         public DateTime FechaModificacion { get; set; } = DateTime.Now;
+       
     }
 }

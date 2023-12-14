@@ -75,7 +75,7 @@ namespace AdminPagosApi.Controllers
                 var ValideExistencia = await ValidarExistencia(sedeEntidadDTOCR);
                 if (ValideExistencia)
                 {
-                    return BadRequest(new { message = "La sede : >> " + sedeEntidadDTOCR.EntidadId + " << ya existe" });
+                    return BadRequest(new { message = "La sede ya tiene asociada la empresa" });
                 }
 
                 //var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
@@ -113,6 +113,37 @@ namespace AdminPagosApi.Controllers
             //-----------------------------------------------------------------------------------------
             entidad.Id = id;
             context.Entry(entidad).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+
+        [HttpPatch("{id:int}")]
+        public async Task<ActionResult> Patch(int id, JsonPatchDocument<SedeEntidadDTO> patchDocument)
+        {
+            if (patchDocument == null)
+            {
+                return BadRequest();
+            }
+            var entidadDB = await context.SedeEntidades.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (entidadDB == null)
+            {
+                return NotFound();
+            }
+
+            var entidadDTO = mapper.Map<SedeEntidadDTO>(entidadDB);
+            patchDocument.ApplyTo(entidadDTO, ModelState);
+
+            var esValido = TryValidateModel(entidadDTO);
+            if (!esValido)
+            {
+                return BadRequest(ModelState);
+            }
+
+            mapper.Map(entidadDTO, entidadDB);
+            entidadDB.FechaModificacion = DateTime.Now;
+
             await context.SaveChangesAsync();
             return NoContent();
         }

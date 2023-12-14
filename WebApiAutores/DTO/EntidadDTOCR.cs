@@ -27,6 +27,7 @@ namespace AdminPagosApi.DTO
         public int DepartamentoId { get; set; }
 
         public int MunicipioId { get; set; }
+        public int PeriodicidadFactura { get; set; }
 
     }
 }
