@@ -2,9 +2,11 @@
 using AdminPagosApi.Entidades;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using WebApiAutores.Entidades;
 
@@ -79,7 +81,16 @@ namespace AdminPagosApi.Helpers
             CreateMap<FacturaTipoObligacionConceptos, FacturaTipoObligacionConceptosDTO>().ReverseMap();
             CreateMap<FacturaTipoObligacionConceptosDTOCR, FacturaTipoObligacionConceptos>();
 
+            CreateMap<TipoDocumentos, TipoDocumentoDTO>().ReverseMap();
+            CreateMap<TipoDocumentoDTOCR, TipoDocumentos>();
 
+            CreateMap<FacturaDocumentos, FacturaDocumentosDTO>().ReverseMap();
+            CreateMap<FacturaDocumentosDTOCR, FacturaDocumentos>();
+
+            CreateMap<Firmas, FirmasDTO>().ReverseMap();
+            CreateMap<FirmasDTOCR, Firmas>()
+                .ForMember(dest => dest.FuncionarioApruebaFirma, opt => opt.Ignore())
+                .ForMember(dest => dest.FuncionarioElaboroFirma, opt => opt.Ignore());
         }
     }
 }

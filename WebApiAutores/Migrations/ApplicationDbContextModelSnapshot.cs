@@ -22,6 +22,71 @@ namespace AdminPagosApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AdminPagosApi.Entidades.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
             modelBuilder.Entity("AdminPagosApi.Entidades.Entidad", b =>
                 {
                     b.Property<int>("Id")
@@ -92,6 +157,50 @@ namespace AdminPagosApi.Migrations
                     b.ToTable("Entidades");
                 });
 
+            modelBuilder.Entity("AdminPagosApi.Entidades.FacturaDocumentos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("FacturaRegistroId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaModificacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NombreArchivo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nota")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TipoDocumentosId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacturaRegistroId");
+
+                    b.HasIndex("TipoDocumentosId");
+
+                    b.ToTable("FacturaDocumentos");
+                });
+
             modelBuilder.Entity("AdminPagosApi.Entidades.FacturaEstado", b =>
                 {
                     b.Property<int>("Id")
@@ -156,6 +265,9 @@ namespace AdminPagosApi.Migrations
                     b.Property<DateTime?>("FechaEmision")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("FechaFacturaUltimoPago")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("FechaModificacion")
                         .HasColumnType("datetime2");
 
@@ -183,9 +295,6 @@ namespace AdminPagosApi.Migrations
                     b.Property<int>("SedeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UrlFactura")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
@@ -193,6 +302,9 @@ namespace AdminPagosApi.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ValorFacturaUltimoPago")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorFacturaxConcepto")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -214,6 +326,9 @@ namespace AdminPagosApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal>("ConsumoMes")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("FacturaRegistroId")
                         .HasColumnType("int");
 
@@ -222,6 +337,9 @@ namespace AdminPagosApi.Migrations
 
                     b.Property<DateTime>("FechaModificacion")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("RubroPresupuesto")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TipoObligacionId")
                         .HasColumnType("int");
@@ -274,6 +392,64 @@ namespace AdminPagosApi.Migrations
                     b.HasIndex("TipoConceptoFacturacionId");
 
                     b.ToTable("FacturaTipoObligacionConceptos");
+                });
+
+            modelBuilder.Entity("AdminPagosApi.Entidades.Firmas", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaModificacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FuncionarioAprueba")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FuncionarioApruebaCargo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FuncionarioApruebaDependencia")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FuncionarioApruebaFirma")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FuncionarioElaboro")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FuncionarioElaboroCargo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FuncionarioElaboroDependencia")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FuncionarioElaboroFirma")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TipoPagoAdmonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TipoPagoAdmonId");
+
+                    b.ToTable("Firmas");
                 });
 
             modelBuilder.Entity("AdminPagosApi.Entidades.MMenu", b =>
@@ -509,6 +685,37 @@ namespace AdminPagosApi.Migrations
                     b.ToTable("TipoConceptoFacturacion");
                 });
 
+            modelBuilder.Entity("AdminPagosApi.Entidades.TipoDocumentos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Codigo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaModificacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipoDocumentos");
+                });
+
             modelBuilder.Entity("AdminPagosApi.Entidades.TipoEmpresa", b =>
                 {
                     b.Property<int>("Id")
@@ -666,6 +873,9 @@ namespace AdminPagosApi.Migrations
                     b.Property<DateTime>("FechaModificacion")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("RubroPresupuesto")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("TipoPagoAdmonId")
                         .HasColumnType("int");
 
@@ -779,6 +989,139 @@ namespace AdminPagosApi.Migrations
                     b.ToTable("TipoVinculacionContractual");
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
             modelBuilder.Entity("WebApiAutores.Entidades.Autor", b =>
                 {
                     b.Property<int>("Id")
@@ -830,13 +1173,15 @@ namespace AdminPagosApi.Migrations
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
+                    b.Property<string>("UsuarioId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("CoordinacionPGNs");
                 });
@@ -1140,6 +1485,25 @@ namespace AdminPagosApi.Migrations
                     b.Navigation("TipoEmpresas");
                 });
 
+            modelBuilder.Entity("AdminPagosApi.Entidades.FacturaDocumentos", b =>
+                {
+                    b.HasOne("AdminPagosApi.Entidades.FacturaRegistro", "FacturaRegistro")
+                        .WithMany()
+                        .HasForeignKey("FacturaRegistroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AdminPagosApi.Entidades.TipoDocumentos", "TipoDocumentos")
+                        .WithMany()
+                        .HasForeignKey("TipoDocumentosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FacturaRegistro");
+
+                    b.Navigation("TipoDocumentos");
+                });
+
             modelBuilder.Entity("AdminPagosApi.Entidades.FacturaRegistro", b =>
                 {
                     b.HasOne("AdminPagosApi.Entidades.Entidad", "Entidad")
@@ -1201,6 +1565,17 @@ namespace AdminPagosApi.Migrations
                     b.Navigation("FacturaTipoObligacion");
 
                     b.Navigation("TipoConceptoFacturacion");
+                });
+
+            modelBuilder.Entity("AdminPagosApi.Entidades.Firmas", b =>
+                {
+                    b.HasOne("AdminPagosApi.Entidades.TipoPagoAdmon", "TipoPagoAdmon")
+                        .WithMany()
+                        .HasForeignKey("TipoPagoAdmonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TipoPagoAdmon");
                 });
 
             modelBuilder.Entity("AdminPagosApi.Entidades.MMenu", b =>
@@ -1278,6 +1653,66 @@ namespace AdminPagosApi.Migrations
                         .IsRequired();
 
                     b.Navigation("TipoPagoAdmon");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("AdminPagosApi.Entidades.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("AdminPagosApi.Entidades.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AdminPagosApi.Entidades.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("AdminPagosApi.Entidades.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApiAutores.Entidades.CoordinacionPGN", b =>
+                {
+                    b.HasOne("AdminPagosApi.Entidades.ApplicationUser", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("WebApiAutores.Entidades.CoordinacionPGNSede", b =>

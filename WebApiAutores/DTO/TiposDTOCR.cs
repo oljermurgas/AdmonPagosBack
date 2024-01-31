@@ -30,6 +30,7 @@ namespace AdminPagosApi.DTO
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
         public int TipoPagoAdmonId { get; set; }
+        public string RubroPresupuesto { get; set; }
         public TipoPagoAdmon TipoPagoAdmon { get; set; }
     }
 
@@ -70,6 +71,13 @@ namespace AdminPagosApi.DTO
         public string Codigo { get; set; }
         [Required(ErrorMessage = "Este campo es requerido")]
         public string Descripcion { get; set; }
+    }
+
+    public class TipoDocumentoDTOCR
+    {
+        public string Codigo { get; set; }
+        public string Descripcion { get; set; }
+
     }
 
 }

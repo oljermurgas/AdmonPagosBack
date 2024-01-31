@@ -9,5 +9,6 @@ namespace AdminPagosApi.DTO
         public int FacturaTipoObligacionId { get; set; }
         public int TipoConceptoFacturacionId { get; set; }
         public decimal Valor { get; set;  }
+        public decimal ConsumoMesTipoObligacion { get; set; } 
     }
 }

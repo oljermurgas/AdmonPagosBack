@@ -16,7 +16,7 @@ namespace AdminPagosApi.DTO
         public string JefeCoordinadorNombre { get; set; }
         public string JefeCoordinadorEmail { get; set; }
 
-        public int UsuarioId { get; set; }
+        public string UsuarioId { get; set; }
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
         public DateTime FechaModificacion { get; set; } = DateTime.Now;
     }

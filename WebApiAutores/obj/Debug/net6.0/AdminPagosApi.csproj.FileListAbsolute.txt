@@ -103,6 +103,10 @@ C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\AutoMapper.Exte
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Azure.Core.dll
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Azure.Identity.dll
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Humanizer.dll
+C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
@@ -118,6 +122,8 @@ C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.Exten
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
@@ -184,3 +190,5 @@ C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\obj\Debug\net6.0\refint\AdminPag
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\obj\Debug\net6.0\AdminPagosApi.pdb
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\obj\Debug\net6.0\AdminPagosApi.genruntimeconfig.cache
 C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\obj\Debug\net6.0\ref\AdminPagosApi.dll
+C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\Dapper.dll
+C:\OMC\PGN\AdministraPago\BackEnd\WebApiAutores\bin\Debug\net6.0\AdminPagosApi.staticwebassets.runtime.json

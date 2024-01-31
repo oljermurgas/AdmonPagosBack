@@ -1,8 +1,10 @@
 ﻿using AdminPagosApi.DTO;
 using AdminPagosApi.Entidades;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,16 +16,20 @@ namespace AdminPagosApi.Controllers
 {
     [ApiController]
     [Route("AdmonPago/Api/Coordinadors")]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CoordinadoresController : ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public CoordinadoresController(ApplicationDbContext context, IMapper mapper)
+        public CoordinadoresController(ApplicationDbContext context, 
+                                        IMapper mapper,
+                                        UserManager<ApplicationUser> userManager)
         {
             this.context = context;
             this.mapper = mapper;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -55,13 +61,9 @@ namespace AdminPagosApi.Controllers
               .Include(x => x.CoordinacionPGNs)
               .Where(x => x.CoordinacionPGNId == id)
               .ToListAsync();
-
-
             if (!entidades.Any())
-            {
-                return NotFound();
-            }
-
+               return NotFound();
+            
             var dtos = mapper.Map<List<SedeDTO>>(entidades);
             return Ok(dtos);
         }
@@ -71,29 +73,28 @@ namespace AdminPagosApi.Controllers
         {
             var entidad = await context.CoordinacionPGNs.FirstOrDefaultAsync(x => x.Id == id);
             if (entidad == null)
-            {
                 return NotFound();
-            }
+      
             var dtos = mapper.Map<CoordinadorPgnDTO>(entidad);
             return dtos;
         }
 
 
         [HttpPost]
+        //[Authorize(Policy = "esAdmin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Post([FromBody] CoordinadorPgnDTOCR coordinadorDTOCR)
         {
             try
             {
                 var ValideExistencia = await ValidarExistencia(coordinadorDTOCR);
                 if (ValideExistencia)
-                {
-                    return BadRequest(new { message = "La sede : >> " + coordinadorDTOCR.Coodinacion + " << ya existe" });
-                }
-
-                //var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
+                    return BadRequest(new { message = "La cordinación : >> " + coordinadorDTOCR.Coodinacion + " << ya existe" });
+                
+                var usuarioId = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
                 var entidad = mapper.Map<CoordinacionPGN>(coordinadorDTOCR);
                 //-----------------------------------------------------------------------------------------
-                //entidad.UserName = userName;
+                entidad.UsuarioId = usuarioId;
                 entidad.FechaCreacion = DateTime.Now;
                 entidad.Estado = true;
                 //-----------------------------------------------------------------------------------------
@@ -109,13 +110,13 @@ namespace AdminPagosApi.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Policy = "esAdmin")]
         public async Task<ActionResult> Put(int id, [FromBody] CoordinadorPgnDTO coordinadorDTO)
         {
             var existe = await context.CoordinacionPGNs.AnyAsync(x => x.Id == id);
             if (!existe)
-            {
-                return NotFound();
-            }
+               return NotFound();
+            
 
             //var userName = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value;
             var entidad = mapper.Map<CoordinadorPgnDTO>(coordinadorDTO);
@@ -130,19 +131,17 @@ namespace AdminPagosApi.Controllers
         }
 
         [HttpPatch("{id:int}")]
+        [Authorize(Policy = "esAdmin")]
         public async Task<ActionResult> Patch(int id, JsonPatchDocument<CoordinadorPgnDTO> patchDocument)
         {
             if (patchDocument == null)
-            {
-                return BadRequest();
-            }
+               return BadRequest();
+            
             var sedeDB = await context.CoordinacionPGNs.FirstOrDefaultAsync(x => x.Id == id);
 
             if (sedeDB == null)
-            {
                 return NotFound();
-            }
-
+            
             var sedeDTO = mapper.Map<CoordinadorPgnDTO>(sedeDB);
             patchDocument.ApplyTo(sedeDTO, ModelState);
 
@@ -159,15 +158,15 @@ namespace AdminPagosApi.Controllers
             return NoContent();
         }
 
+
         [HttpDelete("{id:int}")]
+        [Authorize(Policy = "esAdmin")]
         public async Task<ActionResult> Delete(int id)
         {
             var existe = await context.CoordinacionPGNs.AnyAsync(x => x.Id == id);
             if (!existe)
-            {
-                return NotFound();
-            }
-
+               return NotFound();
+            
             var entidad = await context.CoordinacionPGNs.FirstOrDefaultAsync(x => x.Id == id);
             entidad.Id = id;
             entidad.Estado = false;

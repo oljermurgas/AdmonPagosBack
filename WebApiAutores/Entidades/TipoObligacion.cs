@@ -12,6 +12,7 @@ namespace AdminPagosApi.Entidades
 
         [Required(ErrorMessage = "Este campo es requerido")]
         public string Descripcion { get; set; }
+        public string RubroPresupuesto { get; set; }
         public bool Estado { get; set; }
         public int UsuarioId { get; set; }
         public DateTime FechaCreacion { get; set; } = DateTime.Now;

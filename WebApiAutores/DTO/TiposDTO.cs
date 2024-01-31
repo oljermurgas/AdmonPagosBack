@@ -48,6 +48,7 @@ namespace AdminPagosApi.DTO
         public int Id { get; set; }
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
+        public string RubroPresupuesto { get; set; }
         public int UsuarioId { get; set; }
         public bool Estado { get; set; }
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
@@ -154,4 +155,16 @@ namespace AdminPagosApi.DTO
         public DateTime Fecha { get; set; }
         public decimal Valor { get; set; }
     }
+
+    public class TipoDocumentoDTO
+    {
+        public int Id { get; set; }
+        public string Codigo { get; set; }
+        public string Descripcion { get; set; }
+        public int UsuarioId { get; set; }
+        public bool Estado { get; set; }
+        public DateTime FechaCreacion { get; set; } = DateTime.Now;
+        public DateTime FechaModificacion { get; set; } = DateTime.Now;
+    }
+
 }

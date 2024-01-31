@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\OMC\\PGN\\AdministraPago\\BackEnd\\WebApiAutores\\wwwroot\\firmas\\053a699f-66a5-4f44-a609-b140929c94d8.png",
+      "PackagePath": "staticwebassets\\firmas\\053a699f-66a5-4f44-a609-b140929c94d8.png"
+    },
+    {
+      "Id": "C:\\OMC\\PGN\\AdministraPago\\BackEnd\\WebApiAutores\\wwwroot\\firmas\\0c73e6e0-b20d-45e4-a520-cb9967805ecf.png",
+      "PackagePath": "staticwebassets\\firmas\\0c73e6e0-b20d-45e4-a520-cb9967805ecf.png"
+    },
+    {
+      "Id": "C:\\OMC\\PGN\\AdministraPago\\BackEnd\\WebApiAutores\\wwwroot\\firmas\\7aa61a6b-d5f4-4d99-b084-96ba777f7bf7.png",
+      "PackagePath": "staticwebassets\\firmas\\7aa61a6b-d5f4-4d99-b084-96ba777f7bf7.png"
+    },
+    {
+      "Id": "C:\\OMC\\PGN\\AdministraPago\\BackEnd\\WebApiAutores\\wwwroot\\firmas\\8b57c226-5449-4f94-b554-f694a451eca9.png",
+      "PackagePath": "staticwebassets\\firmas\\8b57c226-5449-4f94-b554-f694a451eca9.png"
+    },
+    {
+      "Id": "C:\\OMC\\PGN\\AdministraPago\\BackEnd\\WebApiAutores\\wwwroot\\firmas\\a7b0bd96-0641-4ac4-b047-95cc4161219f.png",
+      "PackagePath": "staticwebassets\\firmas\\a7b0bd96-0641-4ac4-b047-95cc4161219f.png"
+    },
+    {
+      "Id": "C:\\OMC\\PGN\\AdministraPago\\BackEnd\\WebApiAutores\\wwwroot\\firmas\\bb994c73-cc66-4f41-951d-febbbb378bc3.png",
+      "PackagePath": "staticwebassets\\firmas\\bb994c73-cc66-4f41-951d-febbbb378bc3.png"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.AdminPagosApi.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.AdminPagosApi.props",
+      "PackagePath": "build\\AdminPagosApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.AdminPagosApi.props",
+      "PackagePath": "buildMultiTargeting\\AdminPagosApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.AdminPagosApi.props",
+      "PackagePath": "buildTransitive\\AdminPagosApi.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

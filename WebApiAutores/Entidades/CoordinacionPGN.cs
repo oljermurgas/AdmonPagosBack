@@ -1,4 +1,7 @@
-﻿namespace WebApiAutores.Entidades
+﻿using AdminPagosApi.Entidades;
+using Microsoft.AspNetCore.Identity;
+
+namespace WebApiAutores.Entidades
 {
     public class CoordinacionPGN
     {
@@ -12,7 +15,8 @@
         public string JefeCoordinadorNombre { get; set; }
 
         public string JefeCoordinadorEmail { get; set; }
-        public int UsuarioId { get; set; }
+        public string UsuarioId { get; set; }
+        public ApplicationUser Usuario { get; set; }
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
         public DateTime FechaModificacion { get; set; } = DateTime.Now;
     }

@@ -18,6 +18,7 @@ namespace AdminPagosApi.DTO
         public DateTime? FechaEmision { get; set; }
         public DateTime? FechaOportunoPago { get; set; }
         public decimal ValorFactura { get; set; }
+        public decimal ValorFacturaxConcepto { get; set; }
         public int FacturaEstadoId { get; set; }
         public FacturaEstado FacturaEstado { get; set; }
         public string Nota { get; set; }
@@ -26,6 +27,8 @@ namespace AdminPagosApi.DTO
         public bool PagoInmediato { get; set; }
 
         public decimal ValorFacturaUltimoPago { get; set; }
+        public DateTime? FechaFacturaUltimoPago { get; set; }
+
         public string UrlFactura { get; set; }
 
         public int UsuarioId { get; set; }

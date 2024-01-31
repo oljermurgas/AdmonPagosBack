@@ -10,6 +10,8 @@ namespace AdminPagosApi.Entidades
 
         public int TipoObligacionId  { get; set; }
         public TipoObligacion TipoObligacion { get; set; }
+        public decimal ConsumoMes { get; set; }
+        public string RubroPresupuesto { get; set; }
 
         public int UsuarioId { get; set; }
         public DateTime FechaCreacion { get; set; }
